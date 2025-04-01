@@ -4,32 +4,32 @@ import "./App.css";
 import "./index.css";
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux"; //Manages global state for currency conversion.
 import { RootState, store } from "./redux/store";
 import {
   setAmount,
   setBaseCurrency,
   setTargetCurrency,
   fetchExchangeRate,
-} from "./redux/currencySlice";
+} from "./redux/currencySlice"; //Dispatches actions to update the currency conversion state.
 import { fetchCurrencyCodes } from "./api/api";
 import { Container } from "react-bootstrap";
 
 function App() {
-  const dispatch = useDispatch<typeof store.dispatch>();
+  const dispatch = useDispatch<typeof store.dispatch>(); // Allows you to send actions to update the Redux store.
 
   const { amount, baseCurrency, targetCurrency, exchangeRate } = useSelector(
     (state: RootState) => state.currency
-  );
+  ); //getting the values from the redux store
 
   const { data: currencyCodes, isLoading } = useQuery({
     queryKey: ["currencyCodes"],
     queryFn: fetchCurrencyCodes,
-  });
+  }); //Getting the currency codes and values for the options
 
   useEffect(() => {
     dispatch(fetchExchangeRate());
-  }, [baseCurrency, targetCurrency, dispatch]);
+  }, [baseCurrency, targetCurrency, dispatch]); // this function is responsible for the conversion
 
   return (
     <Container>

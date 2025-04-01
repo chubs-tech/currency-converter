@@ -20,7 +20,7 @@ const initialState: CurrencyState = {
   status: "idle",
 };
 
-// Fetch exchange rate based on selected currencies
+
 export const fetchExchangeRate = createAsyncThunk(
   "currency/fetchExchangeRate",
   async (_, { getState }) => {
@@ -30,7 +30,7 @@ export const fetchExchangeRate = createAsyncThunk(
     const response = await axios.get(`${API_BASE_URL}/pair/${baseCurrency}/${targetCurrency}`);
     return response.data.conversion_rate;
   }
-);
+); // Fetch exchange rate based on selected currencies
 
 export const currencySlice = createSlice({
   name: "currency",

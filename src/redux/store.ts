@@ -7,6 +7,7 @@ export const store = configureStore({
   },
 });
 
-// Define RootState and AppDispatch for TypeScript support
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof store.getState>; 
+    //Represents the entire state of the Redux store.
+    //Useful for TypeScript to ensure correct state selection in components.
 export type AppDispatch = typeof store.dispatch;
